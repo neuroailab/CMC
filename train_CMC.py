@@ -54,6 +54,7 @@ def parse_option():
     parser.add_argument('--nce_t', type=float, default=0.07)
     parser.add_argument('--nce_m', type=float, default=0.5)
     parser.add_argument('--feat_dim', type=int, default=128, help='dim of feat for inner product')
+    parser.add_argument('--is_half', action='store_true', help='Half the network for resnet')
 
     # specify folder
     parser.add_argument('--data_folder', type=str, default=None, help='path to data')
@@ -122,7 +123,7 @@ def set_model(args, n_data):
     if args.model == 'alexnet':
         model = alexnet(args.feat_dim)
     elif args.model.startswith('resnet'):
-        model = ResNetV2(args.model)
+        model = ResNetV2(args.model, is_half=args.is_half)
     else:
         raise ValueError('model not supported yet {}'.format(args.model))
     contrast = NCEAverage(args.feat_dim, n_data, args.nce_k, args.nce_t, args.nce_m)

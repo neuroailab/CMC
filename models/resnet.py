@@ -266,17 +266,17 @@ class ResNetV1(nn.Module):
 
 
 class ResNetV2(nn.Module):
-    def __init__(self, name='resnet50'):
+    def __init__(self, name='resnet50', is_half=False):
         super(ResNetV2, self).__init__()
         if name == 'resnet50':
-            self.l_to_ab = resnet50(in_channel=1)
-            self.ab_to_l = resnet50(in_channel=2)
+            self.l_to_ab = resnet50(in_channel=1, is_half=is_half)
+            self.ab_to_l = resnet50(in_channel=2, is_half=is_half)
         elif name == 'resnet18':
-            self.l_to_ab = resnet18(in_channel=1)
-            self.ab_to_l = resnet18(in_channel=2)
+            self.l_to_ab = resnet18(in_channel=1, is_half=is_half)
+            self.ab_to_l = resnet18(in_channel=2, is_half=is_half)
         elif name == 'resnet101':
-            self.l_to_ab = resnet101(in_channel=1)
-            self.ab_to_l = resnet101(in_channel=2)
+            self.l_to_ab = resnet101(in_channel=1, is_half=is_half)
+            self.ab_to_l = resnet101(in_channel=2, is_half=is_half)
         else:
             raise NotImplementedError('model {} is not implemented'.format(name))
 
