@@ -49,7 +49,7 @@ def parse_option():
                         help='path to latest checkpoint (default: none)')
 
     # model definition
-    parser.add_argument('--model', type=str, default='alexnet', choices=['alexnet', 'resnet50', 'resnet101'])
+    parser.add_argument('--model', type=str, default='alexnet', choices=['alexnet', 'resnet18', 'resnet50', 'resnet101'])
     parser.add_argument('--nce_k', type=int, default=4096)
     parser.add_argument('--nce_t', type=float, default=0.07)
     parser.add_argument('--nce_m', type=float, default=0.5)
@@ -216,7 +216,6 @@ def train(epoch, train_loader, model, contrast, criterion_l, criterion_ab, optim
                    epoch, idx + 1, len(train_loader), batch_time=batch_time,
                    data_time=data_time, loss=losses, lprobs=l_prob_meter,
                    abprobs=ab_prob_meter))
-            print(out_l.shape)
             sys.stdout.flush()
 
     return l_loss_meter.avg, l_prob_meter.avg, ab_loss_meter.avg, ab_prob_meter.avg
